@@ -1,25 +1,5 @@
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Label } from '@/components/ui/label';
-import { Progress } from '@/components/ui/progress';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
 import {
   Dialog,
   DialogContent,
@@ -34,7 +14,20 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import Icon from '@/components/ui/icon';
+import WarehouseStats from '@/components/warehouse/WarehouseStats';
+import InventoryTab from '@/components/warehouse/InventoryTab';
+import ExpiryTab from '@/components/warehouse/ExpiryTab';
+import AuditTab from '@/components/warehouse/AuditTab';
 
 const Warehouse = () => {
   const [categoryFilter, setCategoryFilter] = useState('all');
@@ -188,64 +181,7 @@ const Warehouse = () => {
         </div>
       </div>
 
-      {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-primary/10 rounded-lg">
-                <Icon name="Package" size={24} className="text-primary" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">{stats.totalItems}</p>
-                <p className="text-sm text-muted-foreground">Позиций на складе</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-yellow-500/10 rounded-lg">
-                <Icon name="TrendingDown" size={24} className="text-yellow-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">{stats.lowStock}</p>
-                <p className="text-sm text-muted-foreground">Низкий запас</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-red-500/10 rounded-lg">
-                <Icon name="Clock" size={24} className="text-red-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">{stats.expiring}</p>
-                <p className="text-sm text-muted-foreground">Истекает срок</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-blue-500/10 rounded-lg">
-                <Icon name="MapPin" size={24} className="text-blue-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">{stats.locations}</p>
-                <p className="text-sm text-muted-foreground">Складских зон</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <WarehouseStats stats={stats} />
 
       <Tabs defaultValue="inventory" className="w-full">
         <TabsList>
@@ -264,287 +200,31 @@ const Warehouse = () => {
         </TabsList>
 
         <TabsContent value="inventory" className="space-y-6 mt-6">
-          <Card>
-            <CardHeader>
-              <div className="flex flex-col md:flex-row gap-4">
-                <div className="flex-1">
-                  <div className="relative">
-                    <Icon name="Search" size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                      placeholder="Поиск товаров..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10"
-                    />
-                  </div>
-                </div>
-                <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-                  <SelectTrigger className="w-full md:w-[180px]">
-                    <SelectValue placeholder="Категория" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Все категории</SelectItem>
-                    <SelectItem value="Бакалея">Бакалея</SelectItem>
-                    <SelectItem value="Молочная продукция">Молочная продукция</SelectItem>
-                    <SelectItem value="Мясо">Мясо</SelectItem>
-                    <SelectItem value="Масла">Масла</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Select value={locationFilter} onValueChange={setLocationFilter}>
-                  <SelectTrigger className="w-full md:w-[180px]">
-                    <SelectValue placeholder="Локация" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Все локации</SelectItem>
-                    <SelectItem value="Ресторан №1">Ресторан №1</SelectItem>
-                    <SelectItem value="Ресторан №2">Ресторан №2</SelectItem>
-                    <SelectItem value="Ресторан №3">Ресторан №3</SelectItem>
-                    <SelectItem value="РЦ Москва">РЦ Москва</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Button variant="outline">
-                  <Icon name="Download" size={16} />
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="rounded-lg border">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Наименование</TableHead>
-                      <TableHead>Категория</TableHead>
-                      <TableHead className="text-right">Остаток</TableHead>
-                      <TableHead>Уровень запаса</TableHead>
-                      <TableHead>Местоположение</TableHead>
-                      <TableHead>Локация</TableHead>
-                      <TableHead>Срок годности</TableHead>
-                      <TableHead className="text-right">Действия</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredInventory.map((item) => {
-                      const stockLevel = getStockLevel(item.quantity, item.min);
-                      const stockPercentage = Math.min((item.quantity / item.min) * 100, 100);
-                      const expiryBadge = getExpiryBadge(item.status, item.daysToExpiry);
-                      
-                      return (
-                        <TableRow key={item.id}>
-                          <TableCell className="font-medium">{item.product}</TableCell>
-                          <TableCell>
-                            <Badge variant="secondary">{item.category}</Badge>
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <div className="font-semibold">{item.quantity} {item.unit}</div>
-                            <div className="text-xs text-muted-foreground">мин: {item.min}</div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="space-y-1">
-                              <Progress value={stockPercentage} className="h-2" />
-                              <p className="text-xs text-muted-foreground">{stockLevel.label}</p>
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex items-center gap-2">
-                              <Icon name="MapPin" size={14} className="text-muted-foreground" />
-                              <span className="text-sm">{item.location}</span>
-                            </div>
-                          </TableCell>
-                          <TableCell className="text-sm text-muted-foreground">{item.restaurant}</TableCell>
-                          <TableCell>
-                            <Badge {...expiryBadge} className={expiryBadge.className}>
-                              <Icon name={expiryBadge.icon as any} size={12} className="mr-1" />
-                              {expiryBadge.label}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <Button variant="ghost" size="sm">
-                              <Icon name="MoreVertical" size={14} />
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
+          <InventoryTab
+            filteredInventory={filteredInventory}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            categoryFilter={categoryFilter}
+            setCategoryFilter={setCategoryFilter}
+            locationFilter={locationFilter}
+            setLocationFilter={setLocationFilter}
+            getStockLevel={getStockLevel}
+            getExpiryBadge={getExpiryBadge}
+          />
         </TabsContent>
 
         <TabsContent value="expiry" className="space-y-6 mt-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Icon name="AlertTriangle" size={18} />
-                Товары с истекающим сроком годности
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {inventoryData
-                  .filter(item => item.status === 'critical' || item.status === 'expiring')
-                  .sort((a, b) => a.daysToExpiry - b.daysToExpiry)
-                  .map((item) => {
-                    const expiryBadge = getExpiryBadge(item.status, item.daysToExpiry);
-                    
-                    return (
-                      <div key={item.id} className={`p-4 border-2 rounded-lg ${
-                        item.status === 'critical' ? 'border-red-500 bg-red-50 dark:bg-red-950/20' : 'border-yellow-500 bg-yellow-50 dark:bg-yellow-950/20'
-                      }`}>
-                        <div className="flex items-center justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                              <Icon 
-                                name={item.status === 'critical' ? 'AlertCircle' : 'AlertTriangle'} 
-                                size={20} 
-                                className={item.status === 'critical' ? 'text-red-600' : 'text-yellow-600'} 
-                              />
-                              <h3 className="font-semibold">{item.product}</h3>
-                              <Badge {...expiryBadge} className={expiryBadge.className}>
-                                {expiryBadge.label}
-                              </Badge>
-                            </div>
-                            <div className="grid grid-cols-4 gap-4 text-sm ml-8">
-                              <div>
-                                <span className="text-muted-foreground">Остаток:</span>
-                                <span className="font-semibold ml-2">{item.quantity} {item.unit}</span>
-                              </div>
-                              <div>
-                                <span className="text-muted-foreground">Локация:</span>
-                                <span className="font-semibold ml-2">{item.restaurant}</span>
-                              </div>
-                              <div>
-                                <span className="text-muted-foreground">Место:</span>
-                                <span className="font-semibold ml-2">{item.location}</span>
-                              </div>
-                              <div>
-                                <span className="text-muted-foreground">Срок:</span>
-                                <span className="font-semibold ml-2">{item.expiry}</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex gap-2">
-                            <Button variant="outline" size="sm">
-                              <Icon name="ShoppingCart" size={14} className="mr-1" />
-                              Списать
-                            </Button>
-                            <Button variant="outline" size="sm">
-                              <Icon name="ArrowRightLeft" size={14} className="mr-1" />
-                              Переместить
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-              </div>
-            </CardContent>
-          </Card>
+          <ExpiryTab
+            inventoryData={inventoryData}
+            getExpiryBadge={getExpiryBadge}
+          />
         </TabsContent>
 
         <TabsContent value="audit" className="space-y-6 mt-6">
-          <Card>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle>Планирование и проведение инвентаризации</CardTitle>
-                <Button onClick={() => setIsInventoryDialogOpen(true)}>
-                  <Icon name="Plus" size={16} className="mr-2" />
-                  Новая инвентаризация
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="rounded-lg border">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>№ инвентаризации</TableHead>
-                      <TableHead>Дата</TableHead>
-                      <TableHead>Зона склада</TableHead>
-                      <TableHead>Локация</TableHead>
-                      <TableHead className="text-right">Позиций</TableHead>
-                      <TableHead>Статус</TableHead>
-                      <TableHead className="text-right">Расхождения</TableHead>
-                      <TableHead className="text-right">Действия</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {inventoryPlans.map((plan) => {
-                      const statusBadge = getInventoryStatusBadge(plan.status);
-                      
-                      return (
-                        <TableRow key={plan.id}>
-                          <TableCell className="font-medium">{plan.id}</TableCell>
-                          <TableCell>{plan.date}</TableCell>
-                          <TableCell>{plan.location}</TableCell>
-                          <TableCell className="text-muted-foreground">{plan.restaurant}</TableCell>
-                          <TableCell className="text-right">{plan.items}</TableCell>
-                          <TableCell>
-                            <Badge {...statusBadge}>{statusBadge.label}</Badge>
-                          </TableCell>
-                          <TableCell className="text-right">
-                            {plan.discrepancies ? (
-                              <Badge variant="destructive">{plan.discrepancies}</Badge>
-                            ) : (
-                              <span className="text-muted-foreground">—</span>
-                            )}
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <div className="flex items-center justify-end gap-1">
-                              {plan.status === 'in_progress' && (
-                                <Button variant="default" size="sm">
-                                  <Icon name="Play" size={14} className="mr-1" />
-                                  Продолжить
-                                </Button>
-                              )}
-                              {plan.status === 'planned' && (
-                                <Button variant="default" size="sm">
-                                  <Icon name="Play" size={14} className="mr-1" />
-                                  Начать
-                                </Button>
-                              )}
-                              {plan.status === 'completed' && (
-                                <>
-                                  <Button variant="ghost" size="sm">
-                                    <Icon name="Eye" size={14} />
-                                  </Button>
-                                  <Button variant="ghost" size="sm">
-                                    <Icon name="Download" size={14} />
-                                  </Button>
-                                </>
-                              )}
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Mobile Inventory Mode Banner */}
-          <Card className="border-primary bg-primary/5">
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-4">
-                <div className="p-4 bg-primary/10 rounded-lg">
-                  <Icon name="Smartphone" size={32} className="text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold mb-1">Мобильный режим инвентаризации</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Используйте мобильное устройство или сканер для проведения инвентаризации на складе
-                  </p>
-                </div>
-                <Button>
-                  <Icon name="Smartphone" size={16} className="mr-2" />
-                  Открыть на телефоне
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <AuditTab
+            inventoryPlans={inventoryPlans}
+            getInventoryStatusBadge={getInventoryStatusBadge}
+          />
         </TabsContent>
       </Tabs>
 
@@ -552,43 +232,12 @@ const Warehouse = () => {
       <Dialog open={isTransferDialogOpen} onOpenChange={setIsTransferDialogOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Оформление перемещения</DialogTitle>
+            <DialogTitle>Перемещение товара</DialogTitle>
             <DialogDescription>
-              Внутреннее перемещение товаров между складскими зонами или локациями
+              Перемещение товара между складскими зонами
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Откуда</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Выберите зону" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="a12">Склад А-12</SelectItem>
-                    <SelectItem value="cold1">Холод-1</SelectItem>
-                    <SelectItem value="cold2">Холод-2</SelectItem>
-                    <SelectItem value="b05">Склад Б-05</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label>Куда</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Выберите зону" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="a12">Склад А-12</SelectItem>
-                    <SelectItem value="cold1">Холод-1</SelectItem>
-                    <SelectItem value="cold2">Холод-2</SelectItem>
-                    <SelectItem value="b05">Склад Б-05</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
             <div className="space-y-2">
               <Label>Товар</Label>
               <Select>
@@ -596,48 +245,52 @@ const Warehouse = () => {
                   <SelectValue placeholder="Выберите товар" />
                 </SelectTrigger>
                 <SelectContent>
-                  {inventoryData.map(item => (
+                  {inventoryData.map((item) => (
                     <SelectItem key={item.id} value={item.id.toString()}>
-                      {item.product} ({item.quantity} {item.unit} на {item.location})
+                      {item.product} ({item.quantity} {item.unit})
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
-
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Количество</Label>
-                <Input type="number" placeholder="0" />
+                <Label>Откуда</Label>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Исходная локация" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="w1">Склад А-12</SelectItem>
+                    <SelectItem value="w2">Холод-1</SelectItem>
+                    <SelectItem value="w3">Склад Б-05</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
-                <Label>Единица измерения</Label>
-                <Input value="кг" disabled />
+                <Label>Куда</Label>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Целевая локация" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="w1">Склад А-12</SelectItem>
+                    <SelectItem value="w2">Холод-1</SelectItem>
+                    <SelectItem value="w3">Склад Б-05</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
-
             <div className="space-y-2">
-              <Label>Причина перемещения</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Выберите причину" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="reorg">Реорганизация склада</SelectItem>
-                  <SelectItem value="temp">Температурный режим</SelectItem>
-                  <SelectItem value="transfer">Передача в другой отдел</SelectItem>
-                  <SelectItem value="other">Другое</SelectItem>
-                </SelectContent>
-              </Select>
+              <Label>Количество для перемещения</Label>
+              <Input type="number" placeholder="0" />
             </div>
-
             <div className="flex justify-end gap-3 pt-4">
               <Button variant="outline" onClick={() => setIsTransferDialogOpen(false)}>
                 Отмена
               </Button>
               <Button onClick={() => setIsTransferDialogOpen(false)}>
-                <Icon name="ArrowRightLeft" size={16} className="mr-2" />
-                Оформить перемещение
+                Переместить
               </Button>
             </div>
           </div>
@@ -648,15 +301,15 @@ const Warehouse = () => {
       <Dialog open={isInventoryDialogOpen} onOpenChange={setIsInventoryDialogOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Планирование инвентаризации</DialogTitle>
+            <DialogTitle>Запланировать инвентаризацию</DialogTitle>
             <DialogDescription>
-              Создайте новую инвентаризацию для проверки складских остатков
+              Создайте план инвентаризации для выбранной локации
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Дата проведения</Label>
+                <Label>Дата инвентаризации</Label>
                 <Input type="date" />
               </div>
               <div className="space-y-2">
@@ -664,22 +317,6 @@ const Warehouse = () => {
                 <Input type="time" />
               </div>
             </div>
-
-            <div className="space-y-2">
-              <Label>Зона склада</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Выберите зону" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Весь склад</SelectItem>
-                  <SelectItem value="a">Склад А</SelectItem>
-                  <SelectItem value="cold">Холодильное оборудование</SelectItem>
-                  <SelectItem value="b">Склад Б</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
             <div className="space-y-2">
               <Label>Локация</Label>
               <Select>
@@ -694,7 +331,19 @@ const Warehouse = () => {
                 </SelectContent>
               </Select>
             </div>
-
+            <div className="space-y-2">
+              <Label>Складская зона</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Выберите зону" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="w1">Склад А</SelectItem>
+                  <SelectItem value="w2">Холодильник</SelectItem>
+                  <SelectItem value="w3">Сухой склад</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             <div className="space-y-2">
               <Label>Ответственный</Label>
               <Select>
@@ -702,25 +351,17 @@ const Warehouse = () => {
                   <SelectValue placeholder="Выберите сотрудника" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="emp1">Иванов И.И.</SelectItem>
-                  <SelectItem value="emp2">Петров П.П.</SelectItem>
-                  <SelectItem value="emp3">Сидоров С.С.</SelectItem>
+                  <SelectItem value="u1">Алексей Козлов</SelectItem>
+                  <SelectItem value="u2">Мария Сидорова</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-
-            <div className="p-4 bg-accent/30 rounded-lg">
-              <p className="text-sm font-medium mb-2">Ожидаемое количество позиций:</p>
-              <p className="text-3xl font-bold">156</p>
-            </div>
-
             <div className="flex justify-end gap-3 pt-4">
               <Button variant="outline" onClick={() => setIsInventoryDialogOpen(false)}>
                 Отмена
               </Button>
               <Button onClick={() => setIsInventoryDialogOpen(false)}>
-                <Icon name="Save" size={16} className="mr-2" />
-                Создать инвентаризацию
+                Запланировать
               </Button>
             </div>
           </div>
