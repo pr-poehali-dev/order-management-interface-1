@@ -11,6 +11,7 @@ import Analytics from '@/pages/Analytics';
 import CalendarView from '@/pages/CalendarView';
 import Reception from '@/pages/Reception';
 import Warehouse from '@/pages/Warehouse';
+import WriteOff from '@/pages/WriteOff';
 import Icon from '@/components/ui/icon';
 
 const queryClient = new QueryClient();
@@ -52,7 +53,7 @@ const App = () => {
 
           <main className="container mx-auto px-6 py-8">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full max-w-4xl grid-cols-6 mb-8">
+              <TabsList className="grid w-full max-w-5xl grid-cols-7 mb-8">
                 <TabsTrigger value="dashboard" className="flex items-center gap-2">
                   <Icon name="LayoutDashboard" size={16} />
                   <span>Дашборд</span>
@@ -68,6 +69,10 @@ const App = () => {
                 <TabsTrigger value="warehouse" className="flex items-center gap-2">
                   <Icon name="Warehouse" size={16} />
                   <span>Склад</span>
+                </TabsTrigger>
+                <TabsTrigger value="writeoff" className="flex items-center gap-2">
+                  <Icon name="Trash2" size={16} />
+                  <span>Списания</span>
                 </TabsTrigger>
                 <TabsTrigger value="analytics" className="flex items-center gap-2">
                   <Icon name="TrendingUp" size={16} />
@@ -93,6 +98,10 @@ const App = () => {
               
               <TabsContent value="warehouse" className="animate-fade-in">
                 <Warehouse />
+              </TabsContent>
+              
+              <TabsContent value="writeoff" className="animate-fade-in">
+                <WriteOff />
               </TabsContent>
               
               <TabsContent value="analytics" className="animate-fade-in">
