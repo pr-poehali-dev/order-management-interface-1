@@ -60,10 +60,9 @@ const Settings = () => {
   ];
 
   const warehouses = [
-    { id: 'W-001', name: 'Склад №1 - Основной', type: 'Центральный', address: 'Москва, ул. Складская, 15', zones: 12, capacity: '500 м²', status: 'active' },
-    { id: 'W-002', name: 'Ресторан №1 - Склад', type: 'Ресторанный', address: 'Москва, ул. Ленина, 45', zones: 4, capacity: '50 м²', status: 'active' },
-    { id: 'W-003', name: 'Ресторан №2 - Склад', type: 'Ресторанный', address: 'Москва, пр. Мира, 120', zones: 4, capacity: '50 м²', status: 'active' },
-    { id: 'W-004', name: 'Ресторан №3 - Склад', type: 'Ресторанный', address: 'Москва, ул. Тверская, 78', zones: 3, capacity: '35 м²', status: 'active' },
+    { id: 'W-001', name: 'Ресторан Сухой', type: 'Ресторанный', zones: 12, capacity: '500 м²', status: 'active' },
+    { id: 'W-002', name: 'Ресторан Фризер', type: 'Ресторанный', zones: 4, capacity: '50 м²', status: 'active' },
+    { id: 'W-003', name: 'Ресторан Кулер', type: 'Ресторанный', zones: 4, capacity: '50 м²', status: 'active' },
   ];
 
   const users = [
@@ -519,7 +518,6 @@ const Settings = () => {
                       <TableHead>Код</TableHead>
                       <TableHead>Название</TableHead>
                       <TableHead>Тип</TableHead>
-                      <TableHead>Адрес</TableHead>
                       <TableHead className="text-right">Зон</TableHead>
                       <TableHead>Площадь</TableHead>
                       <TableHead>Статус</TableHead>
@@ -534,7 +532,6 @@ const Settings = () => {
                         <TableCell>
                           <Badge variant="outline">{warehouse.type}</Badge>
                         </TableCell>
-                        <TableCell className="text-muted-foreground">{warehouse.address}</TableCell>
                         <TableCell className="text-right">{warehouse.zones}</TableCell>
                         <TableCell>{warehouse.capacity}</TableCell>
                         <TableCell>

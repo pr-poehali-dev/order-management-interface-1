@@ -38,6 +38,29 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-8">
+      {/* Quick Actions */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Быстрые действия</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <Button className="h-auto py-4 flex items-center justify-start gap-3">
+              <Icon name="Plus" size={20} />
+              <span>Новый заказ поставщику</span>
+            </Button>
+            <Button variant="outline" className="h-auto py-4 flex items-center justify-start gap-3">
+              <Icon name="ArrowRightLeft" size={20} />
+              <span>Внутреннее перемещение</span>
+            </Button>
+            <Button variant="outline" className="h-auto py-4 flex items-center justify-start gap-3">
+              <Icon name="FileText" size={20} />
+              <span>Сформировать отчёт</span>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {metrics.map((metric, index) => (
@@ -144,36 +167,13 @@ const Dashboard = () => {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Quick Actions */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Быстрые действия</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 gap-3">
-              <Button className="h-auto py-4 flex items-center justify-start gap-3">
-                <Icon name="Plus" size={20} />
-                <span>Новый заказ поставщику</span>
-              </Button>
-              <Button variant="outline" className="h-auto py-4 flex items-center justify-start gap-3">
-                <Icon name="ArrowRightLeft" size={20} />
-                <span>Внутреннее перемещение</span>
-              </Button>
-              <Button variant="outline" className="h-auto py-4 flex items-center justify-start gap-3">
-                <Icon name="FileText" size={20} />
-                <span>Сформировать отчёт</span>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Status Indicators Demo */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Ключевые показатели</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+      {/* Status Indicators Demo */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Ключевые показатели</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="flex items-center justify-between p-3 border rounded-lg">
               <span className="text-sm font-medium">Остатки на складе</span>
               <StatusIndicator type="stock" value={15} threshold={{ warning: 30, critical: 10 }} unit=" поз." />
@@ -190,12 +190,9 @@ const Dashboard = () => {
               <span className="text-sm font-medium">Качество поставок</span>
               <StatusIndicator type="quality" value={92} unit="%" />
             </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Integrations */}
-      <IntegrationStatus />
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

@@ -58,19 +58,34 @@ const AppContent = () => {
     <div className="min-h-screen bg-background flex">
       {/* Sidebar */}
       <aside className={cn(
-        "border-r bg-card transition-all duration-300 flex flex-col",
+        "bg-sidebar border-r border-sidebar-border transition-all duration-300 flex flex-col",
         isSidebarCollapsed ? "w-16" : "w-64"
       )}>
+        {/* Collapse Button */}
+        <div className="border-b border-sidebar-border p-3">
+          <Button
+            variant="ghost"
+            className={cn(
+              "w-full justify-start gap-3 text-sidebar-foreground hover:bg-sidebar-accent",
+              isSidebarCollapsed && "justify-center"
+            )}
+            onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+          >
+            <Icon name={isSidebarCollapsed ? "ChevronRight" : "ChevronLeft"} size={20} />
+            {!isSidebarCollapsed && <span>Свернуть</span>}
+          </Button>
+        </div>
+
         {/* Logo Section */}
-        <div className="border-b p-4">
+        <div className="border-b border-sidebar-border p-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-              <Icon name="Package" size={24} className="text-primary-foreground" />
+            <div className="w-10 h-10 bg-sidebar-primary rounded-xl flex items-center justify-center flex-shrink-0">
+              <Icon name="Package" size={24} className="text-sidebar-primary-foreground" />
             </div>
             {!isSidebarCollapsed && (
               <div>
-                <h1 className="text-lg font-bold text-foreground">OrderFlow</h1>
-                <p className="text-xs text-muted-foreground">Система управления</p>
+                <h1 className="text-lg font-bold text-sidebar-foreground">OrderFlow</h1>
+                <p className="text-xs text-sidebar-foreground/60">Система управления</p>
               </div>
             )}
           </div>
@@ -81,10 +96,11 @@ const AppContent = () => {
           {visibleMenuItems.map((item) => (
             <Button
               key={item.id}
-              variant={activeTab === item.id ? "default" : "ghost"}
+              variant="ghost"
               className={cn(
-                "w-full justify-start gap-3",
-                isSidebarCollapsed ? "px-3" : "px-4"
+                "w-full justify-start gap-3 text-sidebar-foreground hover:bg-sidebar-accent transition-colors",
+                isSidebarCollapsed ? "px-3 justify-center" : "px-4",
+                activeTab === item.id && "bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/90"
               )}
               onClick={() => setActiveTab(item.id)}
             >
@@ -93,18 +109,6 @@ const AppContent = () => {
             </Button>
           ))}
         </nav>
-
-        {/* Collapse Button */}
-        <div className="border-t p-3">
-          <Button
-            variant="ghost"
-            className="w-full justify-start gap-3"
-            onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-          >
-            <Icon name={isSidebarCollapsed ? "ChevronRight" : "ChevronLeft"} size={20} />
-            {!isSidebarCollapsed && <span>Свернуть</span>}
-          </Button>
-        </div>
       </aside>
 
       {/* Main Content */}
