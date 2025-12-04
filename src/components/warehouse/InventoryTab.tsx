@@ -111,7 +111,7 @@ const InventoryTab = ({
                 <TableHead className="text-right">Остаток</TableHead>
                 <TableHead>Уровень запаса</TableHead>
                 <TableHead>Местоположение</TableHead>
-                <TableHead>Локация</TableHead>
+                <TableHead>Ресторан</TableHead>
                 <TableHead>Срок годности</TableHead>
                 <TableHead className="text-right">Действия</TableHead>
               </TableRow>

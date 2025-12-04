@@ -1,11 +1,59 @@
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import IntegrationStatus from '@/components/IntegrationStatus';
 import StatusIndicator from '@/components/StatusIndicator';
 import Icon from '@/components/ui/icon';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 
 const Dashboard = () => {
+  const [isCreateOrderDialogOpen, setIsCreateOrderDialogOpen] = useState(false);
+  const [orderItems, setOrderItems] = useState<Array<{id: number, product: string, quantity: number, unit: string}>>([]);
+
+  const availableProducts = [
+    { id: 1, name: 'Булки для бургеров', unit: 'уп', price: 320 },
+    { id: 2, name: 'Котлеты говяжьи', unit: 'кг', price: 580 },
+    { id: 3, name: 'Сыр чеддер', unit: 'кг', price: 750 },
+    { id: 4, name: 'Листья салата', unit: 'кг', price: 180 },
+    { id: 5, name: 'Картофель фри', unit: 'кг', price: 145 },
+    { id: 6, name: 'Соус барбекю', unit: 'л', price: 250 },
+    { id: 7, name: 'Кетчуп', unit: 'л', price: 180 },
+    { id: 8, name: 'Горчица', unit: 'л', price: 150 },
+    { id: 9, name: 'Лук', unit: 'кг', price: 90 },
+    { id: 10, name: 'Огурчики маринованные', unit: 'кг', price: 220 },
+  ];
+
+  const addOrderItem = () => {
+    setOrderItems([...orderItems, { id: Date.now(), product: '', quantity: 0, unit: 'кг' }]);
+  };
+
+  const removeOrderItem = (id: number) => {
+    setOrderItems(orderItems.filter(item => item.id !== id));
+  };
   const metrics = [
     { title: 'Активные заказы', value: '24', change: '+12%', icon: 'ShoppingCart', trend: 'up' },
     { title: 'Ожидают утверждения', value: '8', change: '+3', icon: 'Clock', trend: 'up' },
@@ -45,7 +93,10 @@ const Dashboard = () => {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <Button className="h-auto py-4 flex items-center justify-start gap-3">
+            <Button 
+              className="h-auto py-4 flex items-center justify-start gap-3"
+              onClick={() => setIsCreateOrderDialogOpen(true)}
+            >
               <Icon name="Plus" size={20} />
               <span>Создать заказ</span>
             </Button>
@@ -193,6 +244,188 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Create Order Dialog */}
+      <Dialog open={isCreateOrderDialogOpen} onOpenChange={setIsCreateOrderDialogOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Создать новый заказ</DialogTitle>
+            <DialogDescription>
+              Заполните данные для создания заказа поставщику
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-6 py-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Дата поставки</Label>
+                <Input type="date" defaultValue="2024-12-06" />
+              </div>
+              <div className="space-y-2">
+                <Label>Поставщик</Label>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Выберите поставщика" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="pepsi">ПепсиКо</SelectItem>
+                    <SelectItem value="baltika">Балтика</SelectItem>
+                    <SelectItem value="ivl">ИВЛ</SelectItem>
+                    <SelectItem value="belaya">Белая дача</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Ресторан</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Выберите ресторан" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="r1">Ресторан №1</SelectItem>
+                  <SelectItem value="r2">Ресторан №2</SelectItem>
+                  <SelectItem value="r3">Ресторан №3</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <Label>Ингредиенты для заказа</Label>
+                <Button variant="outline" size="sm" onClick={addOrderItem}>
+                  <Icon name="Plus" size={14} className="mr-2" />
+                  Добавить товар
+                </Button>
+              </div>
+
+              {orderItems.length > 0 && (
+                <div className="rounded-lg border">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Товар</TableHead>
+                        <TableHead className="text-right">Количество</TableHead>
+                        <TableHead>Ед. изм.</TableHead>
+                        <TableHead className="text-right">Цена</TableHead>
+                        <TableHead className="text-right">Сумма</TableHead>
+                        <TableHead className="w-[50px]"></TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {orderItems.map((item) => {
+                        const product = availableProducts.find(p => p.name === item.product);
+                        const total = product ? product.price * item.quantity : 0;
+                        
+                        return (
+                          <TableRow key={item.id}>
+                            <TableCell>
+                              <Select 
+                                value={item.product}
+                                onValueChange={(value) => {
+                                  const prod = availableProducts.find(p => p.name === value);
+                                  setOrderItems(orderItems.map(i => 
+                                    i.id === item.id 
+                                      ? {...i, product: value, unit: prod?.unit || 'кг'} 
+                                      : i
+                                  ));
+                                }}
+                              >
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Выберите товар" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {availableProducts.map(p => (
+                                    <SelectItem key={p.id} value={p.name}>
+                                      {p.name}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </TableCell>
+                            <TableCell className="text-right">
+                              <Input 
+                                type="number" 
+                                value={item.quantity || ''} 
+                                onChange={(e) => {
+                                  setOrderItems(orderItems.map(i => 
+                                    i.id === item.id 
+                                      ? {...i, quantity: Number(e.target.value)} 
+                                      : i
+                                  ));
+                                }}
+                                className="w-20 text-right"
+                                min="0"
+                              />
+                            </TableCell>
+                            <TableCell className="text-muted-foreground">{item.unit}</TableCell>
+                            <TableCell className="text-right text-muted-foreground">
+                              {product?.price} ₽
+                            </TableCell>
+                            <TableCell className="text-right font-semibold">
+                              {total.toLocaleString()} ₽
+                            </TableCell>
+                            <TableCell>
+                              <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                onClick={() => removeOrderItem(item.id)}
+                              >
+                                <Icon name="X" size={14} />
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                  <div className="p-4 border-t bg-accent/20">
+                    <div className="flex justify-between items-center">
+                      <span className="font-semibold">Итого:</span>
+                      <span className="text-xl font-bold">
+                        {orderItems.reduce((sum, item) => {
+                          const product = availableProducts.find(p => p.name === item.product);
+                          return sum + (product ? product.price * item.quantity : 0);
+                        }, 0).toLocaleString()} ₽
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {orderItems.length === 0 && (
+                <div className="p-8 border-2 border-dashed rounded-lg text-center">
+                  <Icon name="Package" size={48} className="mx-auto text-muted-foreground mb-3" />
+                  <p className="text-sm text-muted-foreground">
+                    Нажмите "Добавить товар" чтобы начать формирование заказа
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className="flex justify-end gap-3 pt-4">
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  setIsCreateOrderDialogOpen(false);
+                  setOrderItems([]);
+                }}
+              >
+                Отмена
+              </Button>
+              <Button 
+                onClick={() => {
+                  setIsCreateOrderDialogOpen(false);
+                  setOrderItems([]);
+                }}
+                disabled={orderItems.length === 0}
+              >
+                Создать заказ
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
