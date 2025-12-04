@@ -10,6 +10,7 @@ import Orders from '@/pages/Orders';
 import Analytics from '@/pages/Analytics';
 import CalendarView from '@/pages/CalendarView';
 import Reception from '@/pages/Reception';
+import Warehouse from '@/pages/Warehouse';
 import Icon from '@/components/ui/icon';
 
 const queryClient = new QueryClient();
@@ -51,7 +52,7 @@ const App = () => {
 
           <main className="container mx-auto px-6 py-8">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full max-w-3xl grid-cols-5 mb-8">
+              <TabsList className="grid w-full max-w-4xl grid-cols-6 mb-8">
                 <TabsTrigger value="dashboard" className="flex items-center gap-2">
                   <Icon name="LayoutDashboard" size={16} />
                   <span>Дашборд</span>
@@ -63,6 +64,10 @@ const App = () => {
                 <TabsTrigger value="reception" className="flex items-center gap-2">
                   <Icon name="ClipboardCheck" size={16} />
                   <span>Приёмка</span>
+                </TabsTrigger>
+                <TabsTrigger value="warehouse" className="flex items-center gap-2">
+                  <Icon name="Warehouse" size={16} />
+                  <span>Склад</span>
                 </TabsTrigger>
                 <TabsTrigger value="analytics" className="flex items-center gap-2">
                   <Icon name="TrendingUp" size={16} />
@@ -84,6 +89,10 @@ const App = () => {
               
               <TabsContent value="reception" className="animate-fade-in">
                 <Reception />
+              </TabsContent>
+              
+              <TabsContent value="warehouse" className="animate-fade-in">
+                <Warehouse />
               </TabsContent>
               
               <TabsContent value="analytics" className="animate-fade-in">
