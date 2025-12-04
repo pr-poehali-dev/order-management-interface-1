@@ -10,6 +10,7 @@ import CalendarView from '@/pages/CalendarView';
 import Reception from '@/pages/Reception';
 import Warehouse from '@/pages/Warehouse';
 import WriteOff from '@/pages/WriteOff';
+import Settings from '@/pages/Settings';
 import Icon from '@/components/ui/icon';
 
 const queryClient = new QueryClient();
@@ -51,7 +52,7 @@ const App = () => {
 
           <main className="container mx-auto px-6 py-8">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full max-w-3xl grid-cols-5 mb-8">
+              <TabsList className="grid w-full max-w-4xl grid-cols-6 mb-8">
                 <TabsTrigger value="orders" className="flex items-center gap-2">
                   <Icon name="ShoppingCart" size={16} />
                   <span>Заказы</span>
@@ -71,6 +72,10 @@ const App = () => {
                 <TabsTrigger value="calendar" className="flex items-center gap-2">
                   <Icon name="Calendar" size={16} />
                   <span>Календарь</span>
+                </TabsTrigger>
+                <TabsTrigger value="settings" className="flex items-center gap-2">
+                  <Icon name="BookOpen" size={16} />
+                  <span>Справочники</span>
                 </TabsTrigger>
               </TabsList>
               
@@ -92,6 +97,10 @@ const App = () => {
               
               <TabsContent value="calendar" className="animate-fade-in">
                 <CalendarView />
+              </TabsContent>
+              
+              <TabsContent value="settings" className="animate-fade-in">
+                <Settings />
               </TabsContent>
             </Tabs>
           </main>
