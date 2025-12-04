@@ -26,13 +26,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components/ui/tabs';
 import { Label } from '@/components/ui/label';
 import Icon from '@/components/ui/icon';
+import Dashboard from '@/pages/Dashboard';
+import Analytics from '@/pages/Analytics';
 
 const Orders = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [activeSubTab, setActiveSubTab] = useState('dashboard');
 
   const orders = [
     { id: 'ORD-2024-1847', date: '04.12.2024', supplier: 'МетроКэш', restaurant: 'Ресторан №1', items: 45, total: '128 450 ₽', status: 'pending', delivery: '06.12.2024' },
@@ -63,11 +72,40 @@ const Orders = () => {
 
   return (
     <div className="space-y-6">
+      <Tabs value={activeSubTab} onValueChange={setActiveSubTab} className="w-full">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-3xl font-bold">Управление заказами</h2>
+            <p className="text-muted-foreground mt-1">Отслеживайте и управляйте всеми заказами</p>
+          </div>
+        </div>
+
+        <TabsList className="mb-6">
+          <TabsTrigger value="dashboard" className="flex items-center gap-2">
+            <Icon name="LayoutDashboard" size={16} />
+            Дашборд
+          </TabsTrigger>
+          <TabsTrigger value="orders" className="flex items-center gap-2">
+            <Icon name="List" size={16} />
+            Список заказов
+          </TabsTrigger>
+          <TabsTrigger value="analytics" className="flex items-center gap-2">
+            <Icon name="BarChart3" size={16} />
+            Аналитика
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="dashboard" className="space-y-6">
+          <Dashboard />
+        </TabsContent>
+
+        <TabsContent value="analytics" className="space-y-6">
+          <Analytics />
+        </TabsContent>
+
+        <TabsContent value="orders" className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold">Управление заказами</h2>
-          <p className="text-muted-foreground mt-1">Отслеживайте и управляйте всеми заказами</p>
-        </div>
         <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
           <DialogTrigger asChild>
             <Button size="lg" className="gap-2">
@@ -257,6 +295,8 @@ const Orders = () => {
           </div>
         </CardContent>
       </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

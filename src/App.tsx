@@ -5,9 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import Dashboard from '@/pages/Dashboard';
 import Orders from '@/pages/Orders';
-import Analytics from '@/pages/Analytics';
 import CalendarView from '@/pages/CalendarView';
 import Reception from '@/pages/Reception';
 import Warehouse from '@/pages/Warehouse';
@@ -17,7 +15,7 @@ import Icon from '@/components/ui/icon';
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('orders');
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -53,11 +51,7 @@ const App = () => {
 
           <main className="container mx-auto px-6 py-8">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full max-w-5xl grid-cols-7 mb-8">
-                <TabsTrigger value="dashboard" className="flex items-center gap-2">
-                  <Icon name="LayoutDashboard" size={16} />
-                  <span>Дашборд</span>
-                </TabsTrigger>
+              <TabsList className="grid w-full max-w-3xl grid-cols-5 mb-8">
                 <TabsTrigger value="orders" className="flex items-center gap-2">
                   <Icon name="ShoppingCart" size={16} />
                   <span>Заказы</span>
@@ -74,19 +68,11 @@ const App = () => {
                   <Icon name="Trash2" size={16} />
                   <span>Списания</span>
                 </TabsTrigger>
-                <TabsTrigger value="analytics" className="flex items-center gap-2">
-                  <Icon name="TrendingUp" size={16} />
-                  <span>Аналитика</span>
-                </TabsTrigger>
                 <TabsTrigger value="calendar" className="flex items-center gap-2">
                   <Icon name="Calendar" size={16} />
                   <span>Календарь</span>
                 </TabsTrigger>
               </TabsList>
-
-              <TabsContent value="dashboard" className="animate-fade-in">
-                <Dashboard />
-              </TabsContent>
               
               <TabsContent value="orders" className="animate-fade-in">
                 <Orders />
@@ -102,10 +88,6 @@ const App = () => {
               
               <TabsContent value="writeoff" className="animate-fade-in">
                 <WriteOff />
-              </TabsContent>
-              
-              <TabsContent value="analytics" className="animate-fade-in">
-                <Analytics />
               </TabsContent>
               
               <TabsContent value="calendar" className="animate-fade-in">
