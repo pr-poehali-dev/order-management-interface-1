@@ -45,18 +45,18 @@ const Settings = () => {
   const [isUserDialogOpen, setIsUserDialogOpen] = useState(false);
 
   const products = [
-    { id: 'P-001', name: 'Мука пшеничная в/с', category: 'Мука и крупы', unit: 'кг', minStock: 50, price: '912 ₽', status: 'active' },
-    { id: 'P-002', name: 'Масло подсолнечное', category: 'Масла', unit: 'л', minStock: 20, price: '1 273 ₽', status: 'active' },
-    { id: 'P-003', name: 'Сахар-песок', category: 'Сахар', unit: 'кг', minStock: 30, price: '895 ₽', status: 'active' },
-    { id: 'P-004', name: 'Курица охлаждённая', category: 'Мясо', unit: 'кг', minStock: 15, price: '3 050 ₽', status: 'active' },
-    { id: 'P-005', name: 'Молоко 3.2%', category: 'Молочные', unit: 'л', minStock: 25, price: '85 ₽', status: 'inactive' },
+    { id: 'P-001', name: 'Булки для бургеров', category: 'Хлебобулочные', unit: 'уп', minStock: 50, price: '320 ₽', status: 'active' },
+    { id: 'P-002', name: 'Котлеты говяжьи', category: 'Мясные изделия', unit: 'кг', minStock: 20, price: '580 ₽', status: 'active' },
+    { id: 'P-003', name: 'Сыр чеддер', category: 'Молочные', unit: 'кг', minStock: 10, price: '750 ₽', status: 'active' },
+    { id: 'P-004', name: 'Листья салата', category: 'Овощи', unit: 'кг', minStock: 5, price: '180 ₽', status: 'active' },
+    { id: 'P-005', name: 'Картофель фри', category: 'Замороженные', unit: 'кг', minStock: 25, price: '145 ₽', status: 'active' },
   ];
 
   const suppliers = [
-    { id: 'S-001', name: 'МетроКэш', contact: 'Иванов Сергей', phone: '+7 (495) 123-45-67', email: 'info@metrocash.ru', terms: 'Отсрочка 14 дней', status: 'active' },
-    { id: 'S-002', name: 'Фудсервис', contact: 'Петрова Мария', phone: '+7 (495) 234-56-78', email: 'orders@foodservice.ru', terms: 'Предоплата 50%', status: 'active' },
-    { id: 'S-003', name: 'РЦ Москва', contact: 'Сидоров Андрей', phone: '+7 (495) 345-67-89', email: 'rc@moscow.ru', terms: 'По договору', status: 'active' },
-    { id: 'S-004', name: 'Лента Опт', contact: 'Козлов Дмитрий', phone: '+7 (495) 456-78-90', email: 'opt@lenta.ru', terms: 'Отсрочка 7 дней', status: 'inactive' },
+    { id: 'S-001', name: 'ПепсиКо', contact: 'Иванов Сергей', phone: '+7 (495) 123-45-67', email: 'info@pepsico.ru', terms: 'Отсрочка 14 дней', status: 'active' },
+    { id: 'S-002', name: 'Балтика', contact: 'Петрова Мария', phone: '+7 (495) 234-56-78', email: 'orders@baltika.ru', terms: 'Предоплата 50%', status: 'active' },
+    { id: 'S-003', name: 'ИВЛ', contact: 'Сидоров Андрей', phone: '+7 (495) 345-67-89', email: 'ivl@meat.ru', terms: 'По договору', status: 'active' },
+    { id: 'S-004', name: 'Белая дача', contact: 'Козлов Дмитрий', phone: '+7 (495) 456-78-90', email: 'opt@belaya-dacha.ru', terms: 'Отсрочка 7 дней', status: 'active' },
   ];
 
   const warehouses = [
@@ -80,7 +80,7 @@ const Settings = () => {
   ];
 
   const categories = [
-    'Мука и крупы', 'Масла', 'Сахар', 'Мясо', 'Молочные', 'Овощи', 'Фрукты', 'Напитки', 'Специи', 'Прочее'
+    'Хлебобулочные', 'Мясные изделия', 'Молочные', 'Овощи', 'Замороженные', 'Соусы', 'Напитки', 'Снэки', 'Кондитерские', 'Прочее'
   ];
 
   return (

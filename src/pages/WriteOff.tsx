@@ -46,45 +46,45 @@ const WriteOff = () => {
     { 
       id: 'WO-2024-089', 
       date: '04.12.2024', 
-      product: 'Молоко 3.2%', 
-      quantity: 12, 
-      unit: 'л',
+      product: 'Листья салата', 
+      quantity: 2, 
+      unit: 'кг',
       reason: 'expiry', 
       restaurant: 'Ресторан №1',
       author: 'Иванов И.И.',
       status: 'pending',
-      amount: '840 ₽'
+      amount: '360 ₽'
     },
     { 
       id: 'WO-2024-088', 
       date: '04.12.2024', 
-      product: 'Курица охлаждённая', 
+      product: 'Котлеты говяжьи', 
       quantity: 3, 
       unit: 'кг',
       reason: 'damage', 
       restaurant: 'Ресторан №2',
       author: 'Петров П.П.',
       status: 'pending',
-      amount: '1 200 ₽'
+      amount: '1 740 ₽'
     },
     { 
       id: 'WO-2024-087', 
       date: '03.12.2024', 
-      product: 'Сметана 20%', 
-      quantity: 5, 
+      product: 'Сыр чеддер', 
+      quantity: 1, 
       unit: 'кг',
       reason: 'expiry', 
       restaurant: 'Ресторан №3',
       author: 'Сидоров С.С.',
       status: 'approved',
-      amount: '650 ₽'
+      amount: '750 ₽'
     },
     { 
       id: 'WO-2024-086', 
       date: '03.12.2024', 
-      product: 'Томаты свежие', 
-      quantity: 8, 
-      unit: 'кг',
+      product: 'Булки для бургеров', 
+      quantity: 3, 
+      unit: 'уп',
       reason: 'damage', 
       restaurant: 'Ресторан №1',
       author: 'Иванов И.И.',
@@ -94,14 +94,14 @@ const WriteOff = () => {
     { 
       id: 'WO-2024-085', 
       date: '02.12.2024', 
-      product: 'Хлеб белый', 
-      quantity: 15, 
-      unit: 'шт',
+      product: 'Соус барбекю', 
+      quantity: 2, 
+      unit: 'л',
       reason: 'expiry', 
       restaurant: 'Ресторан №2',
       author: 'Петров П.П.',
       status: 'approved',
-      amount: '450 ₽'
+      amount: '320 ₽'
     },
   ];
 
@@ -113,10 +113,10 @@ const WriteOff = () => {
   ];
 
   const topWriteOffProducts = [
-    { product: 'Молочная продукция', count: 23, amount: '8 950 ₽' },
-    { product: 'Хлебобулочные изделия', count: 18, amount: '3 240 ₽' },
-    { product: 'Овощи и фрукты', count: 15, amount: '6 780 ₽' },
-    { product: 'Мясная продукция', count: 12, amount: '9 450 ₽' },
+    { product: 'Мясные изделия', count: 23, amount: '12 950 ₽' },
+    { product: 'Хлебобулочные', count: 18, amount: '5 240 ₽' },
+    { product: 'Овощи', count: 15, amount: '3 780 ₽' },
+    { product: 'Молочные', count: 12, amount: '7 450 ₽' },
   ];
 
   const getStatusBadge = (status: string) => {

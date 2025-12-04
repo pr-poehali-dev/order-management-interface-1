@@ -44,12 +44,12 @@ const Orders = () => {
   const [activeSubTab, setActiveSubTab] = useState('dashboard');
 
   const orders = [
-    { id: 'ORD-2024-1847', date: '04.12.2024', supplier: 'МетроКэш', restaurant: 'Ресторан №1', items: 45, total: '128 450 ₽', status: 'pending', delivery: '06.12.2024' },
-    { id: 'ORD-2024-1846', date: '04.12.2024', supplier: 'Фудсервис', restaurant: 'Ресторан №1', items: 32, total: '89 200 ₽', status: 'approved', delivery: '05.12.2024' },
-    { id: 'ORD-2024-1845', date: '03.12.2024', supplier: 'РЦ Москва', restaurant: 'Ресторан №2', items: 78, total: '256 780 ₽', status: 'delivered', delivery: '04.12.2024' },
-    { id: 'ORD-2024-1844', date: '03.12.2024', supplier: 'Лента Опт', restaurant: 'Ресторан №1', items: 24, total: '54 320 ₽', status: 'in_transit', delivery: '05.12.2024' },
-    { id: 'ORD-2024-1843', date: '02.12.2024', supplier: 'МетроКэш', restaurant: 'Ресторан №3', items: 67, total: '189 500 ₽', status: 'delivered', delivery: '03.12.2024' },
-    { id: 'ORD-2024-1842', date: '02.12.2024', supplier: 'РЦ Москва', restaurant: 'Ресторан №2', items: 93, total: '312 890 ₽', status: 'cancelled', delivery: '-' },
+    { id: 'ORD-2024-1847', date: '04.12.2024', supplier: 'ПепсиКо', restaurant: 'Ресторан №1', items: 45, total: '128 450 ₽', status: 'pending', delivery: '06.12.2024' },
+    { id: 'ORD-2024-1846', date: '04.12.2024', supplier: 'Балтика', restaurant: 'Ресторан №1', items: 32, total: '89 200 ₽', status: 'approved', delivery: '05.12.2024' },
+    { id: 'ORD-2024-1845', date: '03.12.2024', supplier: 'ИВЛ', restaurant: 'Ресторан №2', items: 78, total: '256 780 ₽', status: 'delivered', delivery: '04.12.2024' },
+    { id: 'ORD-2024-1844', date: '03.12.2024', supplier: 'Белая дача', restaurant: 'Ресторан №1', items: 24, total: '54 320 ₽', status: 'in_transit', delivery: '05.12.2024' },
+    { id: 'ORD-2024-1843', date: '02.12.2024', supplier: 'ПепсиКо', restaurant: 'Ресторан №3', items: 67, total: '189 500 ₽', status: 'delivered', delivery: '03.12.2024' },
+    { id: 'ORD-2024-1842', date: '02.12.2024', supplier: 'ИВЛ', restaurant: 'Ресторан №2', items: 93, total: '312 890 ₽', status: 'cancelled', delivery: '-' },
   ];
 
   const getStatusBadge = (status: string) => {
@@ -155,10 +155,10 @@ const Orders = () => {
                         <SelectValue placeholder="Выберите поставщика" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="metro">МетроКэш</SelectItem>
-                        <SelectItem value="food">Фудсервис</SelectItem>
-                        <SelectItem value="lenta">Лента Опт</SelectItem>
-                        <SelectItem value="rc">РЦ Москва</SelectItem>
+                        <SelectItem value="pepsi">ПепсиКо</SelectItem>
+                        <SelectItem value="baltika">Балтика</SelectItem>
+                        <SelectItem value="ivl">ИВЛ</SelectItem>
+                        <SelectItem value="belaya">Белая дача</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>

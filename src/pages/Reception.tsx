@@ -42,23 +42,23 @@ const Reception = () => {
   const [isDiscrepancyDialogOpen, setIsDiscrepancyDialogOpen] = useState(false);
 
   const pendingOrders = [
-    { id: 'ORD-2024-1847', supplier: 'МетроКэш', date: '04.12.2024', items: 45, status: 'in_transit' },
-    { id: 'ORD-2024-1846', supplier: 'Фудсервис', date: '04.12.2024', items: 32, status: 'in_transit' },
-    { id: 'ORD-2024-1844', supplier: 'Лента Опт', date: '03.12.2024', items: 24, status: 'in_transit' },
+    { id: 'ORD-2024-1847', supplier: 'ПепсиКо', date: '04.12.2024', items: 45, status: 'in_transit' },
+    { id: 'ORD-2024-1846', supplier: 'Балтика', date: '04.12.2024', items: 32, status: 'in_transit' },
+    { id: 'ORD-2024-1844', supplier: 'Белая дача', date: '03.12.2024', items: 24, status: 'in_transit' },
   ];
 
   const comparisonData = [
-    { product: 'Мука пшеничная в/с', unit: 'кг', ordered: 50, received: 48, expiry: '01.06.2025', status: 'shortage' },
-    { product: 'Масло подсолнечное', unit: 'л', ordered: 30, received: 30, expiry: '15.08.2025', status: 'ok' },
-    { product: 'Сахар-песок', unit: 'кг', ordered: 40, received: 42, expiry: '01.12.2025', status: 'surplus' },
-    { product: 'Курица охлаждённая', unit: 'кг', ordered: 25, received: 25, expiry: '08.12.2024', status: 'defect' },
-    { product: 'Молоко 3.2%', unit: 'л', ordered: 60, received: 60, expiry: '10.12.2024', status: 'ok' },
+    { product: 'Булки для бургеров', unit: 'уп', ordered: 50, received: 48, expiry: '15.12.2024', status: 'shortage' },
+    { product: 'Котлеты говяжьи', unit: 'кг', ordered: 30, received: 30, expiry: '12.12.2024', status: 'ok' },
+    { product: 'Сыр чеддер', unit: 'кг', ordered: 10, received: 12, expiry: '10.01.2025', status: 'surplus' },
+    { product: 'Листья салата', unit: 'кг', ordered: 5, received: 5, expiry: '07.12.2024', status: 'defect' },
+    { product: 'Картофель фри', unit: 'кг', ordered: 25, received: 25, expiry: '15.06.2025', status: 'ok' },
   ];
 
   const receptionHistory = [
-    { id: 'RCP-2024-234', order: 'ORD-2024-1845', date: '03.12.2024', supplier: 'РЦ Москва', items: 78, discrepancies: 2, status: 'completed' },
-    { id: 'RCP-2024-233', order: 'ORD-2024-1843', date: '02.12.2024', supplier: 'МетроКэш', items: 67, discrepancies: 0, status: 'completed' },
-    { id: 'RCP-2024-232', order: 'ORD-2024-1841', date: '01.12.2024', supplier: 'Фудсервис', items: 45, discrepancies: 1, status: 'completed' },
+    { id: 'RCP-2024-234', order: 'ORD-2024-1845', date: '03.12.2024', supplier: 'ИВЛ', items: 78, discrepancies: 2, status: 'completed' },
+    { id: 'RCP-2024-233', order: 'ORD-2024-1843', date: '02.12.2024', supplier: 'ПепсиКо', items: 67, discrepancies: 0, status: 'completed' },
+    { id: 'RCP-2024-232', order: 'ORD-2024-1841', date: '01.12.2024', supplier: 'Балтика', items: 45, discrepancies: 1, status: 'completed' },
   ];
 
   const getStatusBadge = (status: string) => {
@@ -124,7 +124,7 @@ const Reception = () => {
                     <div className="p-4 bg-accent/30 rounded-lg space-y-2">
                       <div className="flex justify-between">
                         <span className="text-sm text-muted-foreground">Поставщик:</span>
-                        <span className="font-semibold">МетроКэш</span>
+                        <span className="font-semibold">ПепсиКо</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-sm text-muted-foreground">Дата заказа:</span>

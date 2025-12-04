@@ -14,15 +14,15 @@ const Dashboard = () => {
   ];
 
   const recentOrders = [
-    { id: 'ORD-2024-1847', supplier: 'МетроКэш', items: 45, total: '128 450 ₽', status: 'pending', date: '04.12.2024' },
-    { id: 'ORD-2024-1846', supplier: 'Фудсервис', items: 32, total: '89 200 ₽', status: 'approved', date: '04.12.2024' },
-    { id: 'ORD-2024-1845', supplier: 'РЦ Москва', items: 78, total: '256 780 ₽', status: 'delivered', date: '03.12.2024' },
-    { id: 'ORD-2024-1844', supplier: 'Лента Опт', items: 24, total: '54 320 ₽', status: 'in_transit', date: '03.12.2024' },
+    { id: 'ORD-2024-1847', supplier: 'ПепсиКо', items: 45, total: '128 450 ₽', status: 'pending', date: '04.12.2024' },
+    { id: 'ORD-2024-1846', supplier: 'Балтика', items: 32, total: '89 200 ₽', status: 'approved', date: '04.12.2024' },
+    { id: 'ORD-2024-1845', supplier: 'ИВЛ', items: 78, total: '256 780 ₽', status: 'delivered', date: '03.12.2024' },
+    { id: 'ORD-2024-1844', supplier: 'Белая дача', items: 24, total: '54 320 ₽', status: 'in_transit', date: '03.12.2024' },
   ];
 
   const alerts = [
-    { type: 'critical', message: 'Задержка поставки от МетроКэш на 2 дня', time: '10 минут назад' },
-    { type: 'warning', message: 'Низкий остаток: Мука пшеничная (5 кг)', time: '1 час назад' },
+    { type: 'critical', message: 'Задержка поставки от ПепсиКо на 2 дня', time: '10 минут назад' },
+    { type: 'warning', message: 'Низкий остаток: Булки для бургеров (5 уп)', time: '1 час назад' },
     { type: 'info', message: 'Заказ ORD-2024-1843 доставлен', time: '2 часа назад' },
   ];
 
@@ -57,6 +57,33 @@ const Dashboard = () => {
               <Icon name="FileText" size={20} />
               <span>Сформировать отчёт</span>
             </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Status Indicators Demo */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Ключевые показатели</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="flex items-center justify-between p-3 border rounded-lg">
+              <span className="text-sm font-medium">Остатки на складе</span>
+              <StatusIndicator type="stock" value={15} threshold={{ warning: 30, critical: 10 }} unit=" поз." />
+            </div>
+            <div className="flex items-center justify-between p-3 border rounded-lg">
+              <span className="text-sm font-medium">Срок годности товаров</span>
+              <StatusIndicator type="expiry" value={3} unit=" дн." />
+            </div>
+            <div className="flex items-center justify-between p-3 border rounded-lg">
+              <span className="text-sm font-medium">Ближайшая доставка</span>
+              <StatusIndicator type="delivery" value={0} />
+            </div>
+            <div className="flex items-center justify-between p-3 border rounded-lg">
+              <span className="text-sm font-medium">Качество поставок</span>
+              <StatusIndicator type="quality" value={92} unit="%" />
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -166,33 +193,6 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
-
-      {/* Status Indicators Demo */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Ключевые показатели</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="flex items-center justify-between p-3 border rounded-lg">
-              <span className="text-sm font-medium">Остатки на складе</span>
-              <StatusIndicator type="stock" value={15} threshold={{ warning: 30, critical: 10 }} unit=" поз." />
-            </div>
-            <div className="flex items-center justify-between p-3 border rounded-lg">
-              <span className="text-sm font-medium">Срок годности товаров</span>
-              <StatusIndicator type="expiry" value={3} unit=" дн." />
-            </div>
-            <div className="flex items-center justify-between p-3 border rounded-lg">
-              <span className="text-sm font-medium">Ближайшая доставка</span>
-              <StatusIndicator type="delivery" value={0} />
-            </div>
-            <div className="flex items-center justify-between p-3 border rounded-lg">
-              <span className="text-sm font-medium">Качество поставок</span>
-              <StatusIndicator type="quality" value={92} unit="%" />
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };
