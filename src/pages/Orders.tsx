@@ -104,96 +104,95 @@ const Orders = () => {
         </TabsContent>
 
         <TabsContent value="orders" className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-        <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
-          <DialogTrigger asChild>
-            <Button size="lg" className="gap-2">
-              <Icon name="Plus" size={18} />
-              Создать заказ
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl">
-            <DialogHeader>
-              <DialogTitle>Новый заказ</DialogTitle>
-              <DialogDescription>
-                Создайте новый заказ поставщику или внутреннее перемещение
-              </DialogDescription>
-            </DialogHeader>
-            <div className="space-y-6 py-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>Тип заказа</Label>
-                  <Select defaultValue="supplier">
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="supplier">Заказ поставщику</SelectItem>
-                      <SelectItem value="internal">Внутреннее перемещение</SelectItem>
-                      <SelectItem value="rc">Заказ с РЦ</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label>Ресторан</Label>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Выберите ресторан" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="r1">Ресторан №1</SelectItem>
-                      <SelectItem value="r2">Ресторан №2</SelectItem>
-                      <SelectItem value="r3">Ресторан №3</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label>Поставщик</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Выберите поставщика" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="metro">МетроКэш</SelectItem>
-                    <SelectItem value="food">Фудсервис</SelectItem>
-                    <SelectItem value="lenta">Лента Опт</SelectItem>
-                    <SelectItem value="rc">РЦ Москва</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label>Дата поставки</Label>
-                <Input type="date" />
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <Label>Позиции заказа</Label>
-                  <Button variant="outline" size="sm">
-                    <Icon name="Plus" size={14} className="mr-1" />
-                    Добавить позицию
-                  </Button>
-                </div>
-                <div className="border rounded-lg p-4 space-y-2">
-                  <Input placeholder="Поиск по номенклатуре..." />
-                  <p className="text-sm text-muted-foreground text-center py-8">
-                    Добавьте товары для заказа
-                  </p>
-                </div>
-              </div>
-              <div className="flex justify-end gap-3 pt-4">
-                <Button variant="outline" onClick={() => setIsCreateDialogOpen(false)}>
-                  Отмена
+          <div className="flex items-center justify-between mb-6">
+            <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+              <DialogTrigger asChild>
+                <Button size="lg" className="gap-2">
+                  <Icon name="Plus" size={18} />
+                  Создать заказ
                 </Button>
-                <Button>Создать заказ</Button>
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
-      </div>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle>Новый заказ</DialogTitle>
+                  <DialogDescription>
+                    Создайте новый заказ поставщику или внутреннее перемещение
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-6 py-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label>Тип заказа</Label>
+                      <Select defaultValue="supplier">
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="supplier">Заказ поставщику</SelectItem>
+                          <SelectItem value="internal">Внутреннее перемещение</SelectItem>
+                          <SelectItem value="rc">Заказ с РЦ</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Ресторан</Label>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Выберите ресторан" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="r1">Ресторан №1</SelectItem>
+                          <SelectItem value="r2">Ресторан №2</SelectItem>
+                          <SelectItem value="r3">Ресторан №3</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Поставщик</Label>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Выберите поставщика" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="metro">МетроКэш</SelectItem>
+                        <SelectItem value="food">Фудсервис</SelectItem>
+                        <SelectItem value="lenta">Лента Опт</SelectItem>
+                        <SelectItem value="rc">РЦ Москва</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Дата поставки</Label>
+                    <Input type="date" />
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <Label>Позиции заказа</Label>
+                      <Button variant="outline" size="sm">
+                        <Icon name="Plus" size={14} className="mr-1" />
+                        Добавить позицию
+                      </Button>
+                    </div>
+                    <div className="border rounded-lg p-4 space-y-2">
+                      <Input placeholder="Поиск по номенклатуре..." />
+                      <p className="text-sm text-muted-foreground text-center py-8">
+                        Добавьте товары для заказа
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-end gap-3 pt-4">
+                    <Button variant="outline" onClick={() => setIsCreateDialogOpen(false)}>
+                      Отмена
+                    </Button>
+                    <Button>Создать заказ</Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
 
-      <Card>
+          <Card>
         <CardHeader>
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
@@ -294,7 +293,7 @@ const Orders = () => {
             </div>
           </div>
         </CardContent>
-      </Card>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
