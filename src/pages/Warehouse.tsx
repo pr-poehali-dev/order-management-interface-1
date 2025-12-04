@@ -118,9 +118,9 @@ const Warehouse = () => {
   ];
 
   const inventoryPlans = [
-    { id: 'INV-2024-012', date: '15.12.2024', location: 'Склад А', restaurant: 'Ресторан №1', status: 'planned', items: 156 },
-    { id: 'INV-2024-011', date: '10.12.2024', location: 'Холодильник', restaurant: 'Ресторан №2', status: 'in_progress', items: 89 },
-    { id: 'INV-2024-010', date: '01.12.2024', location: 'РЦ Москва', restaurant: 'РЦ Москва', status: 'completed', items: 342, discrepancies: 5 },
+    { id: 'INV-2024-012', date: '15.12.2024', location: 'Кулер', inventoryType: 'Недельная', status: 'planned', items: 156 },
+    { id: 'INV-2024-011', date: '10.12.2024', location: 'Фризер', inventoryType: 'Месячная', status: 'in_progress', items: 89 },
+    { id: 'INV-2024-010', date: '01.12.2024', location: 'Сухой склад', inventoryType: 'Управленческая', status: 'completed', items: 342 },
   ];
 
   const getExpiryBadge = (status: string, days: number) => {
@@ -255,28 +255,28 @@ const Warehouse = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Откуда</Label>
+                <Label>Откуда (Рестораны)</Label>
                 <Select>
                   <SelectTrigger>
-                    <SelectValue placeholder="Исходная локация" />
+                    <SelectValue placeholder="Исходный ресторан" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="w1">Склад А-12</SelectItem>
-                    <SelectItem value="w2">Холод-1</SelectItem>
-                    <SelectItem value="w3">Склад Б-05</SelectItem>
+                    <SelectItem value="r1">Ресторан №1</SelectItem>
+                    <SelectItem value="r2">Ресторан №2</SelectItem>
+                    <SelectItem value="r3">Ресторан №3</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label>Куда</Label>
+                <Label>Куда (Рестораны)</Label>
                 <Select>
                   <SelectTrigger>
-                    <SelectValue placeholder="Целевая локация" />
+                    <SelectValue placeholder="Целевой ресторан" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="w1">Склад А-12</SelectItem>
-                    <SelectItem value="w2">Холод-1</SelectItem>
-                    <SelectItem value="w3">Склад Б-05</SelectItem>
+                    <SelectItem value="r1">Ресторан №1</SelectItem>
+                    <SelectItem value="r2">Ресторан №2</SelectItem>
+                    <SelectItem value="r3">Ресторан №3</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

@@ -47,7 +47,7 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <Button className="h-auto py-4 flex items-center justify-start gap-3">
               <Icon name="Plus" size={20} />
-              <span>Новый заказ поставщику</span>
+              <span>Создать заказ</span>
             </Button>
             <Button variant="outline" className="h-auto py-4 flex items-center justify-start gap-3">
               <Icon name="ArrowRightLeft" size={20} />

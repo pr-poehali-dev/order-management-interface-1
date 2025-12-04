@@ -8,12 +8,12 @@ const CalendarView = () => {
   const [currentDate, setCurrentDate] = useState(new Date(2024, 11, 4)); // December 4, 2024
 
   const deliveries = [
-    { date: 4, supplier: 'МетроКэш', orders: 2, status: 'today' },
-    { date: 5, supplier: 'Фудсервис', orders: 3, status: 'upcoming' },
-    { date: 5, supplier: 'Лента Опт', orders: 1, status: 'upcoming' },
-    { date: 6, supplier: 'МетроКэш', orders: 1, status: 'upcoming' },
-    { date: 6, supplier: 'РЦ Москва', orders: 2, status: 'upcoming' },
-    { date: 9, supplier: 'Фудсервис', orders: 1, status: 'upcoming' },
+    { date: 4, supplier: 'ИВЛ', orders: 2, status: 'today' },
+    { date: 5, supplier: 'Белая дача', orders: 3, status: 'upcoming' },
+    { date: 5, supplier: 'Балтика', orders: 1, status: 'upcoming' },
+    { date: 6, supplier: 'ПепсиКо', orders: 1, status: 'upcoming' },
+    { date: 6, supplier: 'ИВЛ', orders: 2, status: 'upcoming' },
+    { date: 9, supplier: 'Белая дача', orders: 1, status: 'upcoming' },
   ];
 
   const getDaysInMonth = (date: Date) => {

@@ -11,23 +11,23 @@ import Icon from '@/components/ui/icon';
 
 const Analytics = () => {
   const topSuppliers = [
-    { name: 'МетроКэш', orders: 45, amount: '1 234 500 ₽', trend: '+12%' },
-    { name: 'РЦ Москва', orders: 38, amount: '987 650 ₽', trend: '+8%' },
-    { name: 'Фудсервис', orders: 32, amount: '756 200 ₽', trend: '+5%' },
-    { name: 'Лента Опт', orders: 28, amount: '623 400 ₽', trend: '-3%' },
+    { name: 'ПепсиКо', orders: 45, amount: '1 234 500 ₽', trend: '+12%' },
+    { name: 'Белая дача', orders: 38, amount: '987 650 ₽', trend: '+8%' },
+    { name: 'ИВЛ', orders: 32, amount: '756 200 ₽', trend: '+5%' },
+    { name: 'Балтика', orders: 28, amount: '623 400 ₽', trend: '-3%' },
   ];
 
   const topProducts = [
-    { name: 'Мука пшеничная в/с', quantity: '450 кг', amount: '45 600 ₽', orders: 12 },
-    { name: 'Масло подсолнечное', quantity: '280 л', amount: '38 200 ₽', orders: 15 },
-    { name: 'Сахар-песок', quantity: '320 кг', amount: '35 800 ₽', orders: 10 },
-    { name: 'Курица охлаждённая', quantity: '180 кг', amount: '54 900 ₽', orders: 8 },
+    { name: 'Котлета говяжья', quantity: '450 кг', amount: '261 000 ₽', orders: 12 },
+    { name: 'Булки для бургеров', quantity: '280 уп', amount: '89 600 ₽', orders: 15 },
+    { name: 'Горчица', quantity: '120 л', amount: '18 000 ₽', orders: 10 },
+    { name: 'Картофель фри', quantity: '380 кг', amount: '55 100 ₽', orders: 8 },
   ];
 
   const inventoryAlerts = [
-    { product: 'Мука пшеничная', current: '5 кг', min: '50 кг', status: 'critical' },
-    { product: 'Сахар-песок', current: '28 кг', min: '30 кг', status: 'warning' },
-    { product: 'Масло растительное', current: '15 л', min: '20 л', status: 'warning' },
+    { product: 'Кетчуп', current: '3 л', min: '15 л', status: 'critical' },
+    { product: 'Лук', current: '2 кг', min: '10 кг', status: 'critical' },
+    { product: 'Огурчики маринованные', current: '1 кг', min: '5 кг', status: 'critical' },
   ];
 
   return (

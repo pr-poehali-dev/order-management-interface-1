@@ -277,7 +277,6 @@ const WriteOff = () => {
                       <TableHead>Товар</TableHead>
                       <TableHead className="text-right">Количество</TableHead>
                       <TableHead>Причина</TableHead>
-                      <TableHead>Ресторан</TableHead>
                       <TableHead>Автор</TableHead>
                       <TableHead className="text-right">Сумма</TableHead>
                       <TableHead>Статус</TableHead>
@@ -302,7 +301,6 @@ const WriteOff = () => {
                               {reasonBadge.label}
                             </Badge>
                           </TableCell>
-                          <TableCell className="text-muted-foreground">{request.restaurant}</TableCell>
                           <TableCell className="text-muted-foreground text-sm">{request.author}</TableCell>
                           <TableCell className="text-right font-semibold">{request.amount}</TableCell>
                           <TableCell>

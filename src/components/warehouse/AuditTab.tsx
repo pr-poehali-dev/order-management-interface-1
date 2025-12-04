@@ -15,10 +15,9 @@ interface InventoryPlan {
   id: string;
   date: string;
   location: string;
-  restaurant: string;
+  inventoryType: string;
   status: string;
   items: number;
-  discrepancies?: number;
 }
 
 interface AuditTabProps {
@@ -59,9 +58,8 @@ const AuditTab = ({ inventoryPlans, getInventoryStatusBadge }: AuditTabProps) =>
                   <TableHead>№ Инвентаризации</TableHead>
                   <TableHead>Дата</TableHead>
                   <TableHead>Локация</TableHead>
-                  <TableHead>Ресторан</TableHead>
+                  <TableHead>Тип инвентаризации</TableHead>
                   <TableHead className="text-right">Позиций</TableHead>
-                  <TableHead className="text-right">Расхождений</TableHead>
                   <TableHead>Статус</TableHead>
                   <TableHead className="text-right">Действия</TableHead>
                 </TableRow>
@@ -74,15 +72,8 @@ const AuditTab = ({ inventoryPlans, getInventoryStatusBadge }: AuditTabProps) =>
                       <TableCell className="font-medium">{plan.id}</TableCell>
                       <TableCell>{plan.date}</TableCell>
                       <TableCell>{plan.location}</TableCell>
-                      <TableCell className="text-muted-foreground">{plan.restaurant}</TableCell>
+                      <TableCell className="text-muted-foreground">{plan.inventoryType}</TableCell>
                       <TableCell className="text-right">{plan.items}</TableCell>
-                      <TableCell className="text-right">
-                        {plan.discrepancies ? (
-                          <Badge variant="destructive">{plan.discrepancies}</Badge>
-                        ) : (
-                          <span className="text-muted-foreground">—</span>
-                        )}
-                      </TableCell>
                       <TableCell>
                         <Badge {...statusBadge}>{statusBadge.label}</Badge>
                       </TableCell>

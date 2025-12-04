@@ -139,34 +139,6 @@ const Reception = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <Label>Сканирование штрих-кодов</Label>
-                    <Button
-                      variant={scanMode ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setScanMode(!scanMode)}
-                    >
-                      <Icon name={scanMode ? 'ScanLine' : 'Scan'} size={16} className="mr-2" />
-                      {scanMode ? 'Активно' : 'Включить'}
-                    </Button>
-                  </div>
-                  
-                  {scanMode && (
-                    <div className="p-6 border-2 border-dashed rounded-lg border-primary bg-primary/5">
-                      <div className="text-center space-y-3">
-                        <Icon name="ScanLine" size={48} className="mx-auto text-primary animate-pulse" />
-                        <p className="font-semibold">Режим сканирования активен</p>
-                        <p className="text-sm text-muted-foreground">
-                          Сканируйте штрих-коды товаров для автоматического заполнения
-                        </p>
-                        <Input
-                          placeholder="Штрих-код появится здесь..."
-                          className="text-center font-mono"
-                        />
-                      </div>
-                    </div>
-                  )}
-
                   <div className="space-y-2">
                     <Label>Номер накладной</Label>
                     <Input placeholder="Введите номер накладной" />
